@@ -21,35 +21,40 @@
 	$thumbs = array();
 	$recipes = array();
 
-	$current_path = "./thumbs";
+	$thumb_path = "./thumbs";
 		
-	if ($handle = opendir($current_path)) {
+	if ($handle = opendir($thumb_path)) {
 		//$entry = readdir($handle);
-		$files = scandir($current_path);
+		$files = scandir($thumb_path);
 		closedir($handle);
 		$thumbs = array_filter($files, "foundThumb");
 
 	}
 
-    	
+    $current_path = "./recipeFiles/";
 
 	foreach($thumbs as $r){
 		$obj = new Recipe($r);
-		array_push($recipes, $obj);
+		$path0 = $current_path.$obj->file_name;
+
+		if(file_exists($path0)){
+// 		  print($path0."<br/>");
+          array_push($recipes, $obj);
+		} // else {print("Nope: ".$path0."<br/>");}
 	}
 
     
 	echo "<p>Number of recipes: ".sizeof($thumbs)."</p>";
 	
 	if (sizeof($thumbs)>0){
-		foreach($recipes as $_agendafile){
+		foreach($recipes as $_displayrecipe){
              
             echo "\n";
             echo "<p class=\"recipe\">";
             // link to big image file, link to thumbnail
-            echo "<a href=\"{$current_path}/{$_agendafile->file_name}\"><img src=\"{$current_path}/{$_agendafile->file_thumbname}\" height=\"200px\" style=\"border:solid 1px black\">";
+            echo "<a href=\"{$current_path}/{$_displayrecipe->file_name}\"><img src=\"{$thumb_path}/{$_displayrecipe->file_thumbname}\" height=\"200px\" style=\"border:solid 1px black\">";
             // name
-			echo "<br>{$_agendafile->baseName}</a></p>";
+			echo "<br>{$_displayrecipe->baseName}</a></p>";
 			echo "\n";
 		}
 	}
