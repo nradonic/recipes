@@ -35,7 +35,8 @@
 		});
 		
 	$(document).ready(function(){
-		$('#f1').submit(
+		$('#t1').focus();
+		$('#f1').keyup(
 			function(){
 				var $texttext = $('#t1').val().toLowerCase();
 				var $allrecipes = $('.recipe');
