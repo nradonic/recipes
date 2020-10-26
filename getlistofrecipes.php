@@ -57,8 +57,9 @@
 	}
 
     
-	echo "<p>Number of recipes: ".sizeof($thumbs)."</p>";
-	
+	echo "<p>Number of recipes: ".sizeof($recipes)."</p>";
+    echo "<p><span>Number found: </span><span id=recipecount ></span></p>";
+
 	if (sizeof($thumbs)>0){
 		foreach($recipes as $_displayrecipe){
 //             print("Recipe name: " . $_displayrecipe->recipe_name);
