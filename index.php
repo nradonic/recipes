@@ -10,7 +10,7 @@
 		</h1>
 		<div style="margin-left:200px" >
 			
-			<p id="monitor"></p><br>	 
+<!-- 			<p id="monitor"></p><br>	  -->
 			<form id="f1" name="f1" action="javascript:void()" onsubmit="if(this.t1.value!=null &amp;&amp; this.t1.value!='')
 				window.findString(this.t1.value);return false;" _lpchecked="1">
 				<label for="t1">Search for:</label><br>
@@ -35,7 +35,8 @@
 		});
 		
 	$(document).ready(function(){
-		$('#f1').submit(
+		$('#t1').focus();
+		$('#f1').keyup(
 			function(){
 				var $texttext = $('#t1').val().toLowerCase();
 				var $allrecipes = $('.recipe');
@@ -43,9 +44,13 @@
 				//$('#monitor').text('recipies: ' + $n + ' ');
                 var selector = ".recipe:not(:contains('" + $texttext + "'))";
                 
-				//$('#monitor').append(selector);
-				//var $k = $(selector).length;
-				//$('#monitor').append(" " + $k);
+/*
+				$('#monitor').append(selector);
+				var $k = $n - $(selector).length;
+				$('#monitor').append(" " + $k);
+*/
+				var $k = $n - $(selector).length;
+				$('#recipecount').html(" " + $k);
 				
 				$allrecipes.show();
 				$(selector).hide();
